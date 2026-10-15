@@ -285,36 +285,93 @@
   const gui = new GUI({ title: 'Scene Settings' });
 
   const fGeneral = gui.addFolder('General Settings');
-  fGeneral.add(params, 'dpr', 0.5, 2.0, 0.1).name('Device Pixel Ratio').onChange((v: number) => {
-    renderer.setPixelRatio(v);
-    resize();
-  });
-  fGeneral.add(params, 'camSpeed', 0.0, 1.0, 0.01).name('Camera Speed').onChange((v: number) => uniforms.u_camSpeed.value = v);
-  fGeneral.add(params, 'noiseIntensity', 0.0, 0.1, 0.001).name('Film Noise').onChange((v: number) => uniforms.u_noiseIntensity.value = v);
+  fGeneral
+    .add(params, 'dpr', 0.5, 2.0, 0.1)
+    .name('Device Pixel Ratio')
+    .onChange((v: number) => {
+      renderer.setPixelRatio(v);
+      resize();
+    });
+  fGeneral
+    .add(params, 'camSpeed', 0.0, 1.0, 0.01)
+    .name('Camera Speed')
+    .onChange((v: number) => (uniforms.u_camSpeed.value = v));
+  fGeneral
+    .add(params, 'noiseIntensity', 0.0, 0.1, 0.001)
+    .name('Film Noise')
+    .onChange((v: number) => (uniforms.u_noiseIntensity.value = v));
 
   const fShape = gui.addFolder('Lava Deformation');
-  fShape.add(params, 'flowSpeed', 0.0, 1.0, 0.01).name('Flow Speed').onChange((v: number) => uniforms.u_flowSpeed.value = v);
-  fShape.add(params, 'distFreq', 0.0, 2.0, 0.01).name('Distortion Freq').onChange((v: number) => uniforms.u_distFreq.value = v);
-  fShape.add(params, 'pulseSpeed', 0.0, 0.5, 0.01).name('Pulse Speed').onChange((v: number) => uniforms.u_pulseSpeed.value = v);
-  fShape.add(params, 'ampBase', 0.0, 1.0, 0.01).name('Base Amplitude').onChange((v: number) => uniforms.u_ampBase.value = v);
+  fShape
+    .add(params, 'flowSpeed', 0.0, 1.0, 0.01)
+    .name('Flow Speed')
+    .onChange((v: number) => (uniforms.u_flowSpeed.value = v));
+  fShape
+    .add(params, 'distFreq', 0.0, 2.0, 0.01)
+    .name('Distortion Freq')
+    .onChange((v: number) => (uniforms.u_distFreq.value = v));
+  fShape
+    .add(params, 'pulseSpeed', 0.0, 0.5, 0.01)
+    .name('Pulse Speed')
+    .onChange((v: number) => (uniforms.u_pulseSpeed.value = v));
+  fShape
+    .add(params, 'ampBase', 0.0, 1.0, 0.01)
+    .name('Base Amplitude')
+    .onChange((v: number) => (uniforms.u_ampBase.value = v));
 
   const fProc = gui.addFolder('Procedural Generation');
-  fProc.add(params, 'octaves', 1, 10, 1).name('Octaves').onChange((v: number) => uniforms.u_octaves.value = v);
-  fProc.add(params, 'fbmAmp', 0.1, 2.0, 0.1).name('Noise Amplitude').onChange((v: number) => uniforms.u_fbmAmp.value = v);
-  fProc.add(params, 'fbmFreqMult', 1.0, 4.0, 0.1).name('Frequency Mult').onChange((v: number) => uniforms.u_fbmFreqMult.value = v);
-  fProc.add(params, 'fbmGain', 0.1, 1.0, 0.05).name('Amplitude Gain').onChange((v: number) => uniforms.u_fbmGain.value = v);
-  fProc.add(params, 'groundHeight', -1.0, 2.0, 0.1).name('Ground Level').onChange((v: number) => uniforms.u_groundHeight.value = v);
+  fProc
+    .add(params, 'octaves', 1, 10, 1)
+    .name('Octaves')
+    .onChange((v: number) => (uniforms.u_octaves.value = v));
+  fProc
+    .add(params, 'fbmAmp', 0.1, 2.0, 0.1)
+    .name('Noise Amplitude')
+    .onChange((v: number) => (uniforms.u_fbmAmp.value = v));
+  fProc
+    .add(params, 'fbmFreqMult', 1.0, 4.0, 0.1)
+    .name('Frequency Mult')
+    .onChange((v: number) => (uniforms.u_fbmFreqMult.value = v));
+  fProc
+    .add(params, 'fbmGain', 0.1, 1.0, 0.05)
+    .name('Amplitude Gain')
+    .onChange((v: number) => (uniforms.u_fbmGain.value = v));
+  fProc
+    .add(params, 'groundHeight', -1.0, 2.0, 0.1)
+    .name('Ground Level')
+    .onChange((v: number) => (uniforms.u_groundHeight.value = v));
 
   const fColors = gui.addFolder('Lava Colors');
-  fColors.addColor(params, 'lavaColorBase').name('Base Color').onChange((v: string) => uniforms.u_lavaColorBase.value.set(v));
-  fColors.add(params, 'lavaBaseIntensity', 0.0, 5.0, 0.1).name('Base Intensity').onChange((v: number) => uniforms.u_lavaBaseIntensity.value = v);
-  fColors.addColor(params, 'lavaColorCool').name('Cool Color').onChange((v: string) => uniforms.u_lavaColorCool.value.set(v));
-  fColors.add(params, 'lavaCoolIntensity', 0.0, 5.0, 0.1).name('Cool Intensity').onChange((v: number) => uniforms.u_lavaCoolIntensity.value = v);
+  fColors
+    .addColor(params, 'lavaColorBase')
+    .name('Base Color')
+    .onChange((v: string) => uniforms.u_lavaColorBase.value.set(v));
+  fColors
+    .add(params, 'lavaBaseIntensity', 0.0, 5.0, 0.1)
+    .name('Base Intensity')
+    .onChange((v: number) => (uniforms.u_lavaBaseIntensity.value = v));
+  fColors
+    .addColor(params, 'lavaColorCool')
+    .name('Cool Color')
+    .onChange((v: string) => uniforms.u_lavaColorCool.value.set(v));
+  fColors
+    .add(params, 'lavaCoolIntensity', 0.0, 5.0, 0.1)
+    .name('Cool Intensity')
+    .onChange((v: number) => (uniforms.u_lavaCoolIntensity.value = v));
 
   const fSparks = gui.addFolder('Sparks Settings');
-  fSparks.add(params, 'sparkCount', 0, 150, 1).name('Particle Count').onChange((v: number) => uniforms.u_sparkCount.value = v);
-  fSparks.addColor(params, 'sparkColor').name('Spark Color').onChange((v: string) => uniforms.u_sparkColor.value.set(v));
-  fSparks.add(params, 'sparkIntensity', 0.0, 10.0, 0.1).name('Spark Intensity').onChange((v: number) => uniforms.u_sparkIntensity.value = v);
+  fSparks
+    .add(params, 'sparkCount', 0, 150, 1)
+    .name('Particle Count')
+    .onChange((v: number) => (uniforms.u_sparkCount.value = v));
+  fSparks
+    .addColor(params, 'sparkColor')
+    .name('Spark Color')
+    .onChange((v: string) => uniforms.u_sparkColor.value.set(v));
+  fSparks
+    .add(params, 'sparkIntensity', 0.0, 10.0, 0.1)
+    .name('Spark Intensity')
+    .onChange((v: number) => (uniforms.u_sparkIntensity.value = v));
 
   gui.close();
 
